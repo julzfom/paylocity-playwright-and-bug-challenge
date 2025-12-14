@@ -5,6 +5,7 @@
   "scripts": {
     "test": "npx playwright test",
     "test:headed": "npx playwright test --headed",
+    "test:ui": "npx playwright test --ui",
     "test:report": "npx playwright show-report",
     "install:browsers": "npx playwright install"
   },

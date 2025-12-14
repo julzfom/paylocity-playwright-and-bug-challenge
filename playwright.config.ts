@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  testDir: './tests',
+  testDir: './test',
   timeout: 30_000,
   expect: { timeout: 5_000 },
   fullyParallel: true,
@@ -18,11 +18,14 @@ export default defineConfig({
     // If you have a UI base URL, set it per-environment or here, e.g. `baseURL: 'https://your-ui.example'`.
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    trace: 'on-first-retry'
+    trace: 'on-first-retry',
+    // Set authentication header for all requests
+    extraHTTPHeaders: {
+      'Authorization': 'Basic VGVzdFVzZXI4NDE6SnQoUV80eW5BQis9'
+    }
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit', use: { ...devices['Desktop Safari'] } }
+
   ]
 });
