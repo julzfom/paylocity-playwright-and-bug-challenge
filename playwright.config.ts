@@ -18,11 +18,7 @@ export default defineConfig({
     // If you have a UI base URL, set it per-environment or here, e.g. `baseURL: 'https://your-ui.example'`.
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-    trace: 'on-first-retry',
-    // Set authentication header for all requests
-    extraHTTPHeaders: {
-      'Authorization': 'Basic VGVzdFVzZXI4NDE6SnQoUV80eW5BQis9'
-    }
+    trace: 'on-first-retry'
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
