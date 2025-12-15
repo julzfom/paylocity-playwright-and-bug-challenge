@@ -23,7 +23,7 @@ test.describe('Benefits Dashboard', () => {
     await expect(addButton).toBeVisible();
   });
 
-  test('should be able to click add button', async ({ page }) => {
+  test('should be able to add Employee', async ({ page }) => {
     const dashboardPage = new BenefitDashboardPage(page);
     
     // Navigate to the benefits dashboard
@@ -31,7 +31,24 @@ test.describe('Benefits Dashboard', () => {
     
     // Click the add button
     await dashboardPage.clickAdd();
+
+     // Fill in form fields
+    const firstName = 'John';
+    const lastName = 'Doe';
+    const dependents = Math.floor(Math.random() * 9); // Random number 0-10
+
+    await page.fill('#firstName', firstName);
+    await page.fill('#lastName', lastName);
+    await page.fill('#dependants', String(dependents));
     
-    // Add assertions based on what happens after clicking
+    // Click the Add button in modal-footer (ensure we click the correct one)
+    await page.click('.modal-footer #addEmployee');
+    
+    // Wait for the employee to appear in the table
+    await page.waitForSelector(`table tbody tr:has-text("${firstName}")`, { timeout: 10000 });
+    
+    // Verify the employee row is visible in the table
+    const employeeRow = page.locator(`table tbody tr:has-text("${firstName}")`);
+    await expect(employeeRow).toBeVisible({ timeout: 10000 });
   });
 });
